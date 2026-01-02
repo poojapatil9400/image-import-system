@@ -1,8 +1,8 @@
 {
-  "dependencies": {
-    "axios": "^1.13.2",
-    "express": "^5.2.1",
-    "minio": "^8.0.6",
-    "pg": "^8.16.3"
+  "name": "image-import-system",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "./start.sh"
   }
 }
