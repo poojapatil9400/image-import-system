@@ -1,0 +1,3 @@
+console.log('Worker service started and waiting for jobs...');
+setInterval(() => {}, 1000);
+
