@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
   const [driveUrl, setDriveUrl] = useState("");
   const [status, setStatus] = useState("");
+
+  // Use environment variable for API
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const importImages = async () => {
     if (!driveUrl) {
@@ -14,7 +17,7 @@ function App() {
     setStatus("Import started...");
 
     try {
-      const res = await fetch("http://localhost:4000/import/google-drive", {
+      const res = await fetch(`${API_URL}/import/google-drive`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: driveUrl })
@@ -45,26 +48,12 @@ function App() {
         <p className="status">{status}</p>
       </div>
 
-      {/* Removed Images Display Section */}
-      {/* No grid or image cards are displayed anymore */}
-
       {/* Links to verify images */}
       <div className="links">
-        <h3>Verify Images in MinIO</h3>
-        <p>
-          Visit <a href="http://localhost:9001" target="_blank" rel="noopener noreferrer">MinIO's Web Interface</a> to view the imported images.
-          <br />
-          Login with:
-          <br />
-          Username: `minioadmin`
-          <br />
-          Password: `minioadmin`
-        </p>
-
         <h3>Verify Images in PostgreSQL</h3>
         <p>
-          To verify the images are saved in the PostgreSQL database, visit the API endpoint: 
-          <a href="http://localhost:4000/images" target="_blank" rel="noopener noreferrer">http://localhost:4000/images</a>
+          Visit API endpoint: 
+          <a href={`${API_URL}/images`} target="_blank" rel="noopener noreferrer">{`${API_URL}/images`}</a>
         </p>
       </div>
     </div>

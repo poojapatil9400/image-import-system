@@ -1,13 +1,18 @@
 #!/bin/bash
+# start.sh
 
 echo "Starting Worker Service..."
 node services/worker-service/worker.js &
 
 echo "Starting API Service..."
-node services/api-service/index.js &
+cd services/api-service
+node index.js &
 
-echo "Starting Frontend..."
-cd services/frontend
+echo "Building Frontend..."
+cd ../frontend
 npm install
-PORT=$PORT npm start
+npm run build
 
+# Serve frontend statically via 'serve'
+npm install -g serve
+serve -s build -l $PORT
