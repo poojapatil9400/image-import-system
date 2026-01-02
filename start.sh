@@ -9,4 +9,5 @@ node services/api-service/index.js &
 echo "Starting Frontend..."
 cd services/frontend
 npm install
-npm start
+PORT=$PORT npm start
+
